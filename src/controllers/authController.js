@@ -29,6 +29,7 @@ const authController = {
             res.cookie('jwtToken', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
                 path: '/'
             });
 
@@ -45,6 +46,7 @@ const authController = {
         res.clearCookie('jwtToken', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
             path: '/'
         });
         res.status(200).json({ message: 'User logged out successfully' });
